@@ -36,10 +36,20 @@ class View:
         self.txt_titolo = ft.Text(value="Biblioteche di Torino", size=38, weight=ft.FontWeight.BOLD)
 
         # --- Sezione 2: Filtraggio ---
-        # TODO
+
+        #creo i dropdown
+        self.dd_biblioteca = ft.Dropdown(label="Biblioteca", on_select=self.controller.handler_selezionaBiblioteca, width=300)
+        self.dd_genere = ft.Dropdown(label="Genere", on_select=self.controller.handler_selezionaGenere, width=200)
+        riga1 = ft.Row([self.dd_biblioteca, self.dd_genere], alignment = ft.MainAxisAlignment.CENTER, spacing=10)
+
+        #popolo i dropdown
+        self.controller.popola_dropdownBiblioteche()
+        self.controller.popola_dropdownGenere()
 
         # Sezione 3: Libri
-        # TODO
+        self.btn_libri = ft.Button(content = "Mostra libri", on_click = self.controller.handler_libri)
+        self.list_view = ft.ListView()
+
 
         # --- Toggle Tema ---
         self.toggle_cambia_tema = ft.Switch(label="Tema scuro", value=True, on_change=self.cambia_tema)
@@ -53,10 +63,11 @@ class View:
             ft.Divider(),
 
             # Sezione 2: Filtraggio
-            # TODO
+            riga1,
 
             # Sezione 3: Libri
-            # TODO
+            self.btn_libri,
+            self.list_view
         )
 
         self.page.scroll = "adaptive"
